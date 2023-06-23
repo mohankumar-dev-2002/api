@@ -1,28 +1,39 @@
 const express = require('express');
+const faker = require('faker');
 const app = express();
 
 const apiKeys = [
-'3ffg5h7j8k',
-'1a2b3c4d5e',
-'qwertyuiop',
-'9z8x7y6w5v',
-'6y7u8i9o0p',
-'asdfghjklz',
-'poiuytrewq',
-'mnbvcxzlkj',
-'0987654321',
-'lkjhgfdsaq'];
-
-const dummyUserData = [
-  { id: 1, name: 'John Doe', email: 'johndoe@example.com', age: 30, city: 'New York' },
-  { id: 2, name: 'Jane Smith', email: 'janesmith@example.com', age: 25, city: 'London' },
-  { id: 3, name: 'Bob Johnson', email: 'bobjohnson@example.com', age: 40, city: 'Sydney' },
-  { id: 4, name: 'Alice Brown', email: 'alicebrown@example.com', age: 35, city: 'Tokyo' },
-  { id: 5, name: 'Michael Lee', email: 'michaellee@example.com', age: 28, city: 'Paris' },
+  '3ffg5h7j8k',
+  '1a2b3c4d5e',
+  'qwertyuiop',
+  '9z8x7y6w5v',
+  '6y7u8i9o0p',
+  'asdfghjklz',
+  'poiuytrewq',
+  'mnbvcxzlkj',
+  '0987654321',
+  'lkjhgfdsaq'
 ];
 
+const generateDummyUserData = (count) => {
+  const users = [];
+  for (let i = 1; i <= count; i++) {
+    const user = {
+      id: i,
+      name: faker.name.findName(),
+      email: faker.internet.email(),
+      age: faker.random.number({ min: 18, max: 65 }),
+      city: faker.address.city()
+    };
+    users.push(user);
+  }
+  return users;
+};
+
+const dummyUserData = generateDummyUserData(10);
+
 const authenticateApiKey = (req, res, next) => {
-  const apiKey = req.query.key;
+  const apiKey = req.query.apiKey;
 
   if (!apiKey || !apiKeys.includes(apiKey)) {
     return res.status(401).json({ error: 'Invalid API key' });
