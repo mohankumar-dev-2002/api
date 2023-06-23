@@ -30,7 +30,7 @@ const generateDummyUserData = (count) => {
   return users;
 };
 
-const dummyUserData = generateDummyUserData(10);
+const dummyUserData = generateDummyUserData(1000);
 
 const authenticateApiKey = (req, res, next) => {
   const apiKey = req.query.apiKey;
