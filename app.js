@@ -12,7 +12,8 @@ const apiKeys = [
   'poiuytrewq',
   'mnbvcxzlkj',
   '0987654321',
-  'lkjhgfdsaq'
+  'lkjhgfdsaq',
+  'mohankumar'
 ];
 
 const generateDummyUserData = (count) => {
@@ -30,7 +31,7 @@ const generateDummyUserData = (count) => {
   return users;
 };
 
-const dummyUserData = generateDummyUserData(1000);
+const dummyUserData = generateDummyUserData(10);
 
 const authenticateApiKey = (req, res, next) => {
   const apiKey = req.query.apiKey;
